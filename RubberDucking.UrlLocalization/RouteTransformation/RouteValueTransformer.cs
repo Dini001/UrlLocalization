@@ -5,7 +5,7 @@ using RubberDucking.UrlLocalization.Settings;
 
 namespace RubberDucking.UrlLocalization.RouteTransformation;
 
-internal class RouteValueTransformer(UrlLocalizationSettings urlLocalizationSettings) : DynamicRouteValueTransformer
+public class RouteValueTransformer(UrlLocalizationSettings urlLocalizationSettings) : DynamicRouteValueTransformer
 {
     private readonly UrlLocalizationSettings urlLocalizationSettings = urlLocalizationSettings;
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubberDucking.UrlLocalization", "RubberDucking.UrlLocalization\RubberDucking.UrlLocalization.csproj", "{E50BF7FA-3093-46D9-B373-E59C6A9F7F75}"
 EndProject
@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "�
 	ProjectSection(SolutionItems) = preProject
 		ReadMe.md = ReadMe.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example1", "Example1\Example1.csproj", "{17E6F1E5-8F61-4020-A659-89ED5F320E9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,8 +22,15 @@ Global
 		{E50BF7FA-3093-46D9-B373-E59C6A9F7F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E50BF7FA-3093-46D9-B373-E59C6A9F7F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E50BF7FA-3093-46D9-B373-E59C6A9F7F75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17E6F1E5-8F61-4020-A659-89ED5F320E9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17E6F1E5-8F61-4020-A659-89ED5F320E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17E6F1E5-8F61-4020-A659-89ED5F320E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17E6F1E5-8F61-4020-A659-89ED5F320E9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_NeutralResourcesLanguage = fr-CA
 	EndGlobalSection
 EndGlobal

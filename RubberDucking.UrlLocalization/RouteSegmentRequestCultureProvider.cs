@@ -19,13 +19,17 @@ public sealed class RouteSegmentRequestCultureProvider(string[] cultures) : Requ
             return null;
 
         var path = httpContext.Request.Path.Value;
-        var indexSlash = path.IndexOf('/', 1); //The first char of the Path is always a '/'
-        if (indexSlash == -1)
+        if (path.Length == 1)
             return null;
+        var endSegment = path.IndexOf('/', 1); //The first char of the Path is always a '/'
+        if (endSegment == -1)
+            endSegment = path.IndexOf('?', 1);
+        if (endSegment == -1)
+            endSegment = path.Length;
 
-        var segmentLangue = path.AsSpan()[1..indexSlash];
-        foreach (var culture in cultures)   //cultures.Contains(segmentLangue)
-            if (segmentLangue.Equals(culture, StringComparison.OrdinalIgnoreCase))
+        var cultureSegment = path.AsSpan()[1..endSegment];
+        foreach (var culture in cultures)   //cultures.Contains(cultureSegment)
+            if (cultureSegment.Equals(culture, StringComparison.OrdinalIgnoreCase))
                 return culture;
 
         return null;

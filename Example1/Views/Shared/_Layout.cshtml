@@ -1,0 +1,91 @@
+﻿@{
+    var cultureName = ViewContext.HttpContext.Features.Get<IRequestCultureFeature>()?.RequestCulture.UICulture.Name;
+}
+<!DOCTYPE html>
+<html lang="@cultureName">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@SharedResources.Page_Title</title>
+
+    @*
+        Setting up the canonical list of url.
+        This is so SEOs understand that those are the same page but using different culture
+
+        Result in something like this :
+        <link rel="canonical" href="...">
+        <link rel="alternate" hreflang="fr-CA" href="...">
+        <link rel="alternate" hreflang="en-CA" href="...">
+        ... => as many as there is available culture
+        <link rel="alternate" hreflang="x-default" href="...">
+    *@
+    @{
+        var actionName = ViewContext.RouteData.Values["action"]?.ToString();
+        var controllerName = ViewContext.RouteData.Values["controller"]?.ToString();
+        var routeValue = new Microsoft.AspNetCore.Routing.RouteValueDictionary(ViewContext.RouteData.Values);
+
+        if (routeValue.ContainsKey("culture"))
+            routeValue.Remove("culture");
+
+        @foreach (var culture in Example1.Cultures.SupportedCultures)
+        {
+            routeValue["culture"] = culture;
+            var url = Url.Action(new Microsoft.AspNetCore.Mvc.Routing.UrlActionContext()
+                {
+                    Action = actionName,
+                    Controller = controllerName,
+                    Protocol = "https",
+                    Values = routeValue
+                });
+            <link rel="alternate" hreflang="@culture" href="@url">
+            @if (culture == cultureName)
+            {
+                <link rel="canonical" href="@url">
+            }
+            @if (culture == Example1.Cultures.DEFAUT_CULTURE)
+            {
+                <link rel="alternate" hreflang="x-default" href="@url">
+            }
+        }
+    }
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            @*
+                This create a link to the current page for others culture
+            *@
+            @Example1.Resources.SharedResources.Same_Page_Link
+            @{
+                var actionName2 = ViewContext.RouteData.Values["action"]?.ToString();
+                var controllerName2 = ViewContext.RouteData.Values["controller"]?.ToString();
+                var routeValue2 = new Microsoft.AspNetCore.Routing.RouteValueDictionary(ViewContext.RouteData.Values);
+                if (routeValue2.ContainsKey("culture"))
+                    routeValue2.Remove("culture");
+            }
+            @foreach (var culture in Example1.Cultures.SupportedCultures)
+            {
+                if (culture == cultureName) // Create the link for all culture except the current one
+                    continue;
+
+                routeValue2["culture"] = culture;
+                var urlOtherCulture = Url.Action(new Microsoft.AspNetCore.Mvc.Routing.UrlActionContext()
+                    {
+                        Action = actionName2,
+                        Controller = controllerName2,
+                        Protocol = "https",
+                        Values = routeValue2
+                    });
+                <a href="@urlOtherCulture">@culture</a>
+            }
+        </nav>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>

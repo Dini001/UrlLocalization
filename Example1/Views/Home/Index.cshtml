@@ -1,0 +1,27 @@
+
+<h1>
+    @Example1.Resources.SharedResources.Index_Message
+</h1>
+
+<p>
+    @Example1.Resources.SharedResources.TagBuilder_Link_Message
+</p>
+@*
+    The value for asp-controller, asp-action et asp-route-area should be the same if the url weren't localized
+*@
+<ul>
+    <li>
+        @* Using de culture of the current request *@
+        <a asp-controller="Home" asp-action="Edit">
+            @Example1.Resources.SharedResources.Edit_Link_Text
+        </a>
+    </li>
+    <li>
+        @* Forcing a specific culture for a link *@
+        <a asp-controller="Home" asp-action="Edit" asp-route-culture="@Example1.Cultures.OTHER_CULTURE_1">
+            Link forced in en-CA
+        </a>
+    </li>
+</ul>
+
+
